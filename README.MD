@@ -24,6 +24,7 @@ cd core/
 ## 更新数据库
 mvn liquibase:update
 cd ../admin
+mvn spring-boot:run
 ```
 
 
