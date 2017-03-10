@@ -65,8 +65,8 @@
                                 <th data-field="href">链接</th>
                                 <th data-field="icon" style="text-align: center;">图标</th>
                                 <th data-field="show" style="text-align: center;">是否显示</th>
-                                <th data-field="permission" style="min-width: 135px;">权限标识</th>
-                                <th name="action" data-render="rendererAction">操作</th>
+                                <th data-field="permission" >权限标识</th>
+                                <th name="action" data-render="rendererAction" style="min-width: 135px;">操作</th>
                             </tr>
                             </thead>
                             <tbody>
