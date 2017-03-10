@@ -17,7 +17,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -141,7 +140,7 @@ public class MenuController extends GenericController<Menu> {
      */
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseMessage add(@Valid Menu menu) {
+    public ResponseMessage add(Menu menu) {
         if (menu.getParentId() == null) {
             menu.setParentId(0);
             menu.setParentIds(",0,");
@@ -175,15 +174,8 @@ public class MenuController extends GenericController<Menu> {
         Menu old = getService().selectById(id);
         assertFound(old, "data is not found!");
         menu.setId(id);
-        Menu parent = getService().selectById(menu.getParentId());
-        if (parent != null) {
-            menu.setParentIds(parent.getParentIds() + parent.getId() + ",");
-        } else {
-            menu.setParentId(0);
-            menu.setParentIds(",0,");
-        }
-        Boolean b = getService().updateById(menu);
-        return ok(b);
+        getService().saveMenu(menu,old.getParentIds());
+        return ok();
     }
 
 

@@ -32,6 +32,29 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     @Autowired
     private RoleMenuMapper roleMenuMapper;
 
+    public void saveMenu(Menu menu,String oldParentIds){
+
+        Menu parent = baseMapper.selectById(menu.getParentId());
+        if (parent != null) {
+            menu.setParentIds(parent.getParentIds() + parent.getId() + ",");
+        } else {
+            menu.setParentId(0);
+            menu.setParentIds(",0,");
+        }
+        baseMapper.updateById(menu);
+
+        // 更新子节点 parentIds
+        EntityWrapper<Menu> ew = new EntityWrapper<>();
+        if (menu.getParentId() != null) {
+            ew.addFilter("parent_ids like {0}", "%," + menu.getId() + ",%");
+        }
+        List<Menu> list = baseMapper.selectList(ew);
+        for (Menu e : list){
+            e.setParentIds(e.getParentIds().replace(oldParentIds, menu.getParentIds()));
+            baseMapper.updateById(e);
+        }
+    }
+
 
     @Override
     public List<Menu> getMenuNav(Integer userId) {

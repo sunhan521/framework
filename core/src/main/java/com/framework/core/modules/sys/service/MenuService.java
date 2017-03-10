@@ -16,6 +16,7 @@ import java.util.List;
  */
 public interface MenuService extends IService<Menu> {
 
+    void saveMenu(Menu menu,String oldParentIds);
 
     List<Menu> getMenuNav(Integer id);
 

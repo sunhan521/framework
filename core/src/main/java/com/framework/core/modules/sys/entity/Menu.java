@@ -31,9 +31,6 @@ public class Menu extends Model<Menu> {
      */
 	@TableField("parent_id")
 	private Integer parentId;
-
-
-
     /**
      * 树ID
      */
@@ -46,12 +43,10 @@ public class Menu extends Model<Menu> {
     /**
      * 排序
      */
-	@NotNull(message = "排序字段不能为空")
 	private Integer sort;
     /**
      * 链接
      */
-    @Size(min = 1000,message = "长度最小10000")
 	private String href;
     /**
      * 图标
