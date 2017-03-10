@@ -23,8 +23,9 @@ cd core/
 ## 更新数据库
 mvn liquibase:update
 cd ../admin
-
 ```
+
+
 浏览器打开 localhost:8080 用户名密码：admin/123123
 
 
