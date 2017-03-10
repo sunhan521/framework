@@ -1,0 +1,26 @@
+table.dataTable thead .sorting_desc:after{
+    content:normal !important;;
+}
+table.dataTable thead .sorting:after{
+    content:normal !important;;
+}
+table.dataTable thead .sorting_asc:after{
+    content:normal !important;
+}
+table.dataTable.no-footer{
+    border-bottom:none !important;
+}
+
+/* 表单验证，tooltip 会被 icon遮挡住 */
+.tooltip,.sweet-alert{
+    z-index: 1000000 !important;
+}
+/* 处理标题被遮盖的问题 */
+.sweet-alert .sa-icon.sa-success::before{
+    transform-origin:50px 60px !important;
+}
+
+
+.form-horizontal .mt-checkbox, .form-horizontal .mt-radio{
+    margin-bottom:0px !important;
+}

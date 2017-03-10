@@ -1,0 +1,14 @@
+#menuContent {
+    display: none;
+    position: absolute;
+    width: 100%;
+    z-index: 1000 !important;
+    margin-top: 1px;
+    padding:5px;
+    overflow: auto;
+    max-height: 400px;
+}
+
+th[name="action"]{
+    width:70px;
+}
