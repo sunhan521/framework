@@ -26,5 +26,14 @@ cd ../admin
 
 ```
 浏览器打开 localhost:8080 用户名密码：admin/123123
-    
-#### 由于静态文件Metronic 非开源，所以我没有放在源码里，如果有兴趣的朋友可以进群： 579585475，群文件里面可以下载,然后放在framework/admin/src/main/resources/static目录下
+
+
+![登录效果](http://git.oschina.net/uploads/images/2017/0310/183928_8157656a_57769.png "登录效果")
+
+![菜单管理](http://git.oschina.net/uploads/images/2017/0310/184201_52b6b78b_57769.png "菜单管理")
+
+![角色管理](http://git.oschina.net/uploads/images/2017/0310/184532_d9f4c801_57769.png "角色管理")
+
+#### 项目属于学习项目，希望多交流，如果有兴趣的朋友可以进群： 579585475
+
+#### 由于静态文件Metronic非开源，可以进去获取静态文件资源,然后放在framework/admin/src/main/resources/static目录下，更改sharedVariables.ossPath=、
