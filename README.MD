@@ -17,6 +17,7 @@
 ## 项目启动
 1. 创建数据库 framework
 2. 命令行启动
+
 ```bash
 mvn clean install
 cd core/
