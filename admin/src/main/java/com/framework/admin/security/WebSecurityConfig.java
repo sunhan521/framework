@@ -45,7 +45,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(loginSuccessHandler()) //登录成功后可使用loginSuccessHandler()存储用户信息，可选。
                 .and()
                 .logout()
-                .deleteCookies("remember-me")
                 .logoutSuccessUrl("/login") //退出登录后的默认网址是”/login”
                 .permitAll()
                 .invalidateHttpSession(true)
