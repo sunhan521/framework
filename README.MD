@@ -24,6 +24,7 @@ cd core/
 ## 更新数据库
 mvn liquibase:update
 cd ../admin
+mvn spring-boot:run
 ```
 
 
@@ -38,4 +39,4 @@ cd ../admin
 
 #### 项目属于学习项目，希望多交流，如果有兴趣的朋友可以进群： 579585475
 
-#### 由于静态文件Metronic非开源，可以进去获取静态文件资源,然后放在framework/admin/src/main/resources/static目录下，更改sharedVariables.ossPath=/
+#### 由于静态文件Metronic非开源，可以进群获取静态文件资源,然后放在framework/admin/src/main/resources/static目录下，更改sharedVariables.ossPath=/
