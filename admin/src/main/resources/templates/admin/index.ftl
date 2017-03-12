@@ -14,12 +14,12 @@
     <meta content=""
           name="description"/>
     <meta content="" name="author"/>
-<@global.importCss/>
+    <@global.importCss/>
     <link rel="shortcut icon" href="favicon.ico"/>
 </head>
 <!-- END HEAD -->
 
-<body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
+<body onhashchange="intPage()" class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
 <!-- BEGIN HEADER -->
 <div class="page-header navbar navbar-fixed-top">
     <!-- BEGIN HEADER INNER -->
@@ -1095,13 +1095,32 @@
     var frameworkd = {
         BASH_PATH: "/"
     };
-//    $.ajaxSetup({
-//        async: false
-//    });
+    // 设置ajax 同步
+    $.ajaxSetup({
+        async: false
+    });
+    // 初始化菜单
     $.get("sys/menu/nav", {}, function (data) {
         $(".page-sidebar-menu").append(getMenu(data));
     });
 
+
+    $(document).ready(function () {
+        intPage();
+    });
+
+    function intPage() {
+        var url;
+        if (window.location.hash)
+            url = window.location.hash.substring(1);
+        else
+            url = "admin/common/home.html";
+        if ($("a[href='" + url + "']").length > 0) {
+            $("a[href='" + url + "']").click();
+        } else {
+            Layout.loadAjaxContent(url);
+        }
+    }
 
     function getMenu(data) {
         var result = "";

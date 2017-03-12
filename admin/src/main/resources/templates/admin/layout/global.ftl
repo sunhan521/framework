@@ -2,7 +2,7 @@
 <#macro basePath>${absPath!'/'}</#macro>
 <#assign ossPath ='http://idle-data.oss-cn-shanghai.aliyuncs.com/assets/'/>
 <#--metric插件-->
-<#macro importOSSPlugin(pathList...)>
+<#macro importOSSResource(pathList...)>
     <#list pathList as path>
         <#if path?ends_with('js')>
         <script src="${ossPath}${path}" type="text/javascript"></script>
@@ -15,7 +15,7 @@
 
 
 <#--插件-->
-<#macro importPlugin(pathList...)>
+<#macro importResource(pathList...)>
     <#list pathList as path>
         <#if path?ends_with('js')>
         <script src="<@basePath/>${path}" type="text/javascript"></script>
@@ -25,11 +25,37 @@
         </#if>
     </#list>
 </#macro>
+
+<#macro importOSSPlugins(pathList...)>
+    <#list pathList as path>
+        <#if path?ends_with('js')>
+        <script src="${ossPath}${path}" type="text/javascript"></script>
+        </#if>
+        <#if path?ends_with('css')>
+        <link href="${ossPath}${path}" rel="stylesheet" type="text/css"/>
+        </#if>
+    </#list>
+</#macro>
+
+
+<#--插件-->
+<#macro importPlugins(pathList...)>
+    <#list pathList as path>
+        <#if path?ends_with('js')>
+        <script src="<@basePath/>${path}" type="text/javascript"></script>
+        </#if>
+        <#if path?ends_with('css')>
+        <link href="<@basePath/>${path}" rel="stylesheet" type="text/css"/>
+        </#if>
+    </#list>
+</#macro>
+
+
 <#-- 此处是公用的引入-->
 
 <#macro importCss()>
 
-    <@importOSSPlugin
+    <@importOSSResource
     <#-- BEGIN GLOBAL MANDATORY STYLES -->
     "global/plugins/font-awesome/css/font-awesome.min.css",
     "global/plugins/simple-line-icons/simple-line-icons.min.css",
@@ -48,6 +74,8 @@
     "global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css",
 
     "global/plugins/jstree/dist/themes/default/style.min.css",
+
+
     <#-- BEGIN THEME GLOBAL STYLES -->
     "global/css/components-rounded.min.css",
     "global/css/plugins.min.css",
@@ -57,7 +85,7 @@
     "layouts/layout2/css/themes/blue.min.css",
     "layouts/layout2/css/custom.min.css"
     />
-    <@importPlugin
+    <@importResource
     "plugins/treegrid/css/jquery.treegrid.css"
     "css/override.css",
     "css/style.css"
@@ -67,14 +95,14 @@
 <#-- 此处是公用的引入-->
 <#macro importRequest()>
 <!--[if lt IE 9]>
-    <@importOSSPlugin
+    <@importOSSResource
     "global/plugins/respond.min.js",
     "global/plugins/excanvas.min.js",
     "global/plugins/ie8.fix.min.js",
     "global/plugins/jquery.min.js"
     />
 <![endif]-->
-    <@importOSSPlugin
+    <@importOSSResource
     "global/plugins/jquery.min.js",
     "global/plugins/bootstrap/js/bootstrap.min.js",
     "global/plugins/js.cookie.min.js",
@@ -108,14 +136,13 @@
     "layouts/global/scripts/quick-sidebar.min.js",
     "layouts/global/scripts/quick-nav.min.js"/>
 
-    <@importPlugin
+    <@importResource
     "js/jquery/jquery.form.js"
 
     "plugins/treegrid/js/jquery.treegrid.js",
     "plugins/treegrid/js/jquery.treegrid.bootstrap3.js"
 
     "js/framework/framework.common.js",
-    "js/admin.js",
     "js/framework/framework.delegate.js",
     "js/framework/framework.ext.js",
     "js/framework/framework.validate.js"

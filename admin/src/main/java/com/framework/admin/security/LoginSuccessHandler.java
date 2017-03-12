@@ -26,7 +26,7 @@ public class LoginSuccessHandler extends
        /* Set<SysRole> roles = userDetails.getSysRoles();*/
         //输出登录提示信息
         System.out.println("管理员 " + userDetails.getName() + " 登录");
-        Collection<SimpleGrantedAuthority> collection =  userDetails.getAuthorities();
+        Collection<SimpleGrantedAuthority> collection = userDetails.getAuthorities();
         System.out.println("IP :" + getIpAddress(request));
 
         super.onAuthenticationSuccess(request, response, authentication);

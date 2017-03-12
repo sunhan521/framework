@@ -82,7 +82,7 @@
         </div>
         <div class="form-actions">
             <label class="rememberme mt-checkbox mt-checkbox-outline">
-                <input type="checkbox" name="remember" value="1"/> 记住我
+                <input type="checkbox" name="remember-me" id="remember-me"/> 记住我
                 <span></span>
             </label>
             <button type="submit" class="btn green pull-right"> 登录</button>

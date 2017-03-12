@@ -1,4 +1,6 @@
 <#import "../../layout/global.ftl" as global />
+<@global.importOSSResource 'global/plugins/bootstrap-select/css/bootstrap-select.min.css'/>
+
 <form id="data-form" class="form-horizontal" role="form" callfn="refreshTable"
       action="<@global.api 'sys/menu/'+param.id!''/>">
     <div class="modal-header">
@@ -59,9 +61,9 @@
                         <label class="control-label col-md-3">图标
                         </label>
                         <div class="col-md-5">
-                            <div class="input-icon right">
-                                <i class="fa"></i>
-                                <input type="text" class="form-control" name="icon" placeholder="请输入图标"/></div>
+                            <select name="icon" class="bs-select form-control" data-live-search="true" data-size="4"
+                                    data-show-subtext="true">
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -99,13 +101,12 @@
 </form>
 
 
-
 <script type="text/javascript">
     var id = "${param.id!''}";
     $(function () {
 
         $(".mt-radio-inline").beeRadio();
-
+        loadIcons();
         loadData();
         $('#data-form').validate({
             rules: {
@@ -120,6 +121,8 @@
                 $("#parentName").val(result.data.parentName);
                 $("#menu_select").attr("data-url", "sys/menu/jstree/?disableId=" + result.data.id + "&&selectedId=" + result.data.parentId);
                 $("#menu_select").beeJsTree();
+                $("select[name='icon]").val(result.data.icon);
+
             });
             method = "PUT";
         } else {
@@ -156,4 +159,22 @@
             hideMenu();
         }
     }
+
+    function loadIcons() {
+        $.getJSON("json/icon.json", function (data) {
+            $("select[name='icon']").html("");
+            $.each(data, function (i, n) {
+                var name = n.split(' ')[1];
+                console.log(name)
+                $("select[name='icon']").append('<option value="fa ' + name + '" data-icon="' + name + '">' + name.replace("fa-", "") + '</option>')
+
+            });
+            $('.bs-select').selectpicker({
+                iconBase: 'fa',
+                tickIcon: 'fa-check'
+            });
+        })
+    }
+
+
 </script>

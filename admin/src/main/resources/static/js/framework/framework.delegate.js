@@ -4,6 +4,12 @@
  * @author Han.Sun
  */
 $(function () {
+    // menu点击的时候，增加#路径
+    $("body").delegate("*[class='ajaxify nav-link']","click",function () {
+        if (window.history.pushState)
+            window.history.pushState(0, 0, "#" + $(this).attr("href"));
+    });
+
     // ajax 加载modal 页面
     $("body").delegate("*[data-toggle='modal']", "click", function () {
         //ajax demo:

@@ -12,7 +12,8 @@
                     </div>
                 </div>
                 <div class="portlet-body">
-                    <div id="menu_tree" data-url="sys/menu/jstree/" class="tree-demo jstree jstree-1 jstree-default"  data-open="true"
+                    <div id="menu_tree" data-url="sys/menu/jstree/" class="tree-demo jstree jstree-1 jstree-default"
+                         data-open="true"
                          role="tree"></div>
                 </div>
             </div>
@@ -65,7 +66,7 @@
                                 <th data-field="href">链接</th>
                                 <th data-field="icon" style="text-align: center;">图标</th>
                                 <th data-field="show" style="text-align: center;">是否显示</th>
-                                <th data-field="permission" >权限标识</th>
+                                <th data-field="permission">权限标识</th>
                                 <th name="action" data-render="rendererAction" style="min-width: 135px;">操作</th>
                             </tr>
                             </thead>
@@ -78,6 +79,7 @@
         </div>
     </div>
 </div>
+<@global.importOSSResource 'global/plugins/bootstrap-select/js/bootstrap-select.min.js'/>
 <script type="text/javascript">
     params = {parentId: 0};
     $(function () {
@@ -166,8 +168,13 @@
     }
 
     function refreshTable() {
-        var tree = $.jstree.reference("#menu_tree");
-        tree.refresh();
+        var tree = $('#menu_tree');
+
+        $.getJSON(tree.data("url"), function (data) {
+            tree.jstree(true).settings.core.data = data;
+            tree.jstree(true).refresh();
+        });
+
         initTreeGrid();
     }
 </script>

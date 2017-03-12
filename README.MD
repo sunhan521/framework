@@ -27,11 +27,7 @@ cd ../admin
 mvn spring-boot:run
 ```
 
-
 浏览器打开 localhost:8080 用户名密码：admin/123123
-
-
-![登录效果](http://git.oschina.net/uploads/images/2017/0310/183928_8157656a_57769.png "登录效果")
 
 ![菜单管理](http://git.oschina.net/uploads/images/2017/0310/184201_52b6b78b_57769.png "菜单管理")
 
