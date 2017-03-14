@@ -9,8 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Web常用工具集，用于获取当前登录用户，请求信息等
- * Created by 浩 on 2015-08-25 0025.
+ * @author Han.Sun
  */
 public class WebUtil {
 

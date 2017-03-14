@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * The type Auth user factory.
- *
  * @author Han.Sun
  */
 public final class AuthUserFactory {

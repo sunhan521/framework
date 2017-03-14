@@ -22,7 +22,9 @@ import com.framework.core.validator.constraints.NotMessyCode;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
+/**
+ * @author Han.Sun
+ */
 public class MessyCodeValidator implements ConstraintValidator<NotMessyCode, String> {
 
     @Override

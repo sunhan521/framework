@@ -1,7 +1,7 @@
 package com.framework.core.exception;
 
 /**
- * Created by 浩 on 2015-12-23 0023.
+ * @author Han.Sun
  */
 public class AuthorizeForbiddenException extends BusinessException {
     private static final long serialVersionUID = 2422918455013900645L;

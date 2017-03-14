@@ -5,8 +5,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Collection;
 
 /**
- * Security User
- *
  * @author Han.Sun
  */
 public class AuthUser extends AbstractAuthUser {

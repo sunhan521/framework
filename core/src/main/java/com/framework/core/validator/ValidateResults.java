@@ -8,7 +8,7 @@ import java.util.Collection;
 
 /**
  * 对象验证结果集合
- * Created by 浩 on 2015-10-10 0010.
+ * @author Han.Sun
  */
 public class ValidateResults extends ArrayList<ValidateResults.ValidResult> implements Serializable {
     private static final long serialVersionUID = 8910856253780046561L;

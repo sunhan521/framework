@@ -1,8 +1,12 @@
 package com.framework.core.utils;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
@@ -449,4 +453,22 @@ public class StringUtils {
         }
     }
 
+
+    public static void main(String[] args) {
+
+        Map m=new HashMap();
+        m.put("a","1");
+        m.put("b","");
+        m.put("c",null);
+        m.put("d",0);
+
+        JSON j=(JSON)JSON.toJSON(m);
+        System.out.println(j);
+        //1.输出结果：{"a":"1","b":"","d":0}
+        String js=JSON.toJSONString(m, SerializerFeature.WriteMapNullValue);
+        System.out.println(js);
+        //2.输出结果：{"a":"1","b":"","c":null,"d":0}
+
+
+    }
 }

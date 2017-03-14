@@ -13,9 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <p>
- * 代码生成器演示
- * </p>
+ * @author Han.Sun
  */
 public class MpGenerator {
     /**

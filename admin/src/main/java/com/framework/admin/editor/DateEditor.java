@@ -6,7 +6,7 @@ import com.framework.core.utils.DateHelper;
 import java.beans.PropertyEditorSupport;
 
 /**
- * @author zhangxd
+ * @author Han.Sun
  */
 public class DateEditor extends PropertyEditorSupport {
 

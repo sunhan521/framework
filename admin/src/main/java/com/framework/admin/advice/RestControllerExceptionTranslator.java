@@ -2,16 +2,19 @@ package com.framework.admin.advice;
 
 import com.framework.core.exception.*;
 import com.framework.core.message.ResponseMessage;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletResponse;
 
-//@ControllerAdvice(annotations = {RestController.class, ResponseBody.class})
-//@Order(1)
+/**
+ * @author Han.Sun
+ */
+@ControllerAdvice(annotations = {RestController.class, ResponseBody.class})
+@Order(1)
 public class RestControllerExceptionTranslator {
 
     @ExceptionHandler(ValidationException.class)

@@ -1,7 +1,7 @@
 package com.framework.core.exception;
 
 /**
- * Created by zhouhao on 16-4-29.
+ * @author Han.Sun
  */
 public class NotFoundException extends BusinessException {
     public NotFoundException(String message) {

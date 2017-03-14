@@ -1,11 +1,8 @@
 package com.framework.admin.security.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
- * Security User
- *
  * @author Han.Sun
  */
 public abstract class AbstractAuthUser implements UserDetails {

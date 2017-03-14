@@ -1,7 +1,7 @@
 package com.framework.admin.utils;
 
 /**
- * Created by sunhan on 21/01/2017.
+ * @author Han.Sun
  */
 public class Const {
 

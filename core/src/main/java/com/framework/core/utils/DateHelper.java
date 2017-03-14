@@ -12,7 +12,7 @@ import java.util.TimeZone;
 /**
  * 日期工具类, 继承org.apache.commons.lang.time.DateUtils类
  *
- * @author zhangxd
+ * @author Han.Sun
  */
 public class DateHelper extends DateUtils {
 

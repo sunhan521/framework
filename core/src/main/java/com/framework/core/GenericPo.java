@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.activerecord.Model;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 
-
+/**
+ * @author Han.Sun
+ */
 public class GenericPo<T extends GenericPo> extends Model<T> implements Serializable, Cloneable{
     private Integer id;
 

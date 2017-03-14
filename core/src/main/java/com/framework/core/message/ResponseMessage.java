@@ -9,6 +9,7 @@ import java.util.*;
 
 /**
  * 响应消息。controller中处理后，返回此对象，响应请求结果给客户端。
+ * @author Han.Sun
  */
 public class ResponseMessage implements Serializable {
     private static final long serialVersionUID = 8992436576262574064L;

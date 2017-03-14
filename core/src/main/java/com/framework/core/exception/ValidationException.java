@@ -4,7 +4,7 @@ package com.framework.core.exception;
 import com.framework.core.validator.ValidateResults;
 
 /**
- * Created by zhouhao on 16-5-12.
+ * @author Han.Sun
  */
 public class ValidationException extends BusinessException {
     private ValidateResults results;
