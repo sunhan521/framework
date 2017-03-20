@@ -4,8 +4,6 @@ import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -84,15 +82,18 @@ public class Menu extends Model<Menu> {
 	@TableField("del_flag")
 	private String delFlag;
 
-	private transient String parentName;
+	@TableField(exist = false)
+	private String parentName;
 	/**
 	 * 是否是叶子节点
 	 */
-	private transient Boolean leaf = true;
+	@TableField(exist = false)
+	private Boolean leaf = true;
 	/**
 	 * 子节点
 	 */
-	private transient List<Menu> children = new ArrayList<>();
+	@TableField(exist = false)
+	private List<Menu> children = new ArrayList<>();
 
 	/**
 	 * 添加子节点

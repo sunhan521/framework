@@ -34,6 +34,8 @@ import static com.framework.core.message.ResponseMessage.ok;
 @RequestMapping("/sys/dict")
 public class DictController extends GenericController<Dict> {
 
+    private EntityWrapper<Dict> ew = new EntityWrapper<>();
+
     @Autowired
     private DictService dictService;
 
@@ -46,11 +48,27 @@ public class DictController extends GenericController<Dict> {
     }
 
 
-    @RequestMapping(value = "/type/{type}", method = RequestMethod.GET)
+    @GetMapping(value = "/type/{type}")
     public List<KeyValue> typeList(@PathVariable String type) {
-        Map<String, Object> param = new HashMap<String, Object>();
+        Map<String, Object> param = new HashMap<>();
         param.put("type", type);
         return getKeyValues(getService().selectByMap(param));
+    }
+
+    @GetMapping(value = "/type/{type}/{value}")
+    public String getLabel(@PathVariable String type, @PathVariable String value) {
+        Map<String, Object> param = new HashMap<>();
+        param.put("type", type);
+        param.put("value", value);
+
+        ew.and("type={0}", type).and("value={0}", value);
+
+        Dict dict = getService().selectOne(ew);
+        if (dict == null) {
+            return "";
+        }
+        return dict.getLabel();
+
     }
 
     @GetMapping(value = "/other/{type}")

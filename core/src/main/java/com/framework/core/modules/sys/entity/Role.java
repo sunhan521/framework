@@ -60,7 +60,8 @@ public class Role extends Model<Role> {
     /**
      * 菜单列表
      */
-    private transient List<Menu> menus = new ArrayList<>();
+    @TableField(exist = false)
+    private List<Menu> menus = new ArrayList<>();
 
     public Integer getId() {
         return id;

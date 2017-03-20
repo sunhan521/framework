@@ -8,24 +8,18 @@
         <version>1.0</version>
     </parent>
 
-    <properties>
-        <velocity.version>1.7</velocity.version>
-    </properties>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>core</artifactId>
     <dependencies>
-        <!--中文转拼音-->
         <dependency>
             <groupId>com.belerweb</groupId>
             <artifactId>pinyin4j</artifactId>
-            <version>2.5.0</version>
             <optional>true</optional>
         </dependency>
         <!--时间解析-->
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
-            <version>2.7</version>
         </dependency>
         <!-- aspectj -->
         <dependency>
@@ -48,33 +42,27 @@
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>1.1.1</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity</artifactId>
-            <version>${velocity.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus</artifactId>
-            <version>2.0.2</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-            <version>1.0.27</version>
         </dependency>
-
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.23</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.5</version>
         </dependency>
     </dependencies>
 

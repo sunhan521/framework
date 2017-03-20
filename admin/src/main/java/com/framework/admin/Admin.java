@@ -7,6 +7,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.HttpMessageConverters;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
@@ -18,6 +19,7 @@ import java.util.Collections;
 @MapperScan("com.framework.core.modules.sys.mapper*")
 @SpringBootApplication
 @ComponentScan("com.framework")
+@EnableCaching
 public class Admin {
 	public static void main(String[] args) {
 		SpringApplication.run(Admin.class, args);

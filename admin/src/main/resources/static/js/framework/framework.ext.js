@@ -16,33 +16,47 @@
             var field = $(this).data("field");
             var render = $(this).data("render");
             var format = $(this).data("format");
+            var dict = $(this).data("dict");
+            var className = $(this).data("class-name");
             if (field) {
                 var column = {orderable: false, searchable: false};
                 column.data = field.toString();
+                column.defaultContent = '';
                 if (format) {
                     column.render = function (data, type, row) {
+                        if (!data){
+                            return "";
+                        }
                         var date = new Date(data);
                         return date.Format(format)
                     };
-
                 }
                 if (render) {
                     column.render = function (data, type, row) {
                         return eval(render + "(data, type, row)");
                     };
                 }
+                if (dict) {
+                    column.render = function (data, type, row) {
+                        $.get("sys/dict/type/" + dict + "/" + data, {}, function (result) {
+                            return result;
+                        })
+                    };
+                }
                 columns.push(column)
 
-            } else if (render) {
-                var columnDef = {};
-                columnDef.targets = i;
-                columnDef.orderable = false;
-                columnDef.searchable = false;
+            }
+            var columnDef = {};
+            columnDef.targets = i;
+            if (className) {
+                columnDef.className = className;
+            }
+            if (render) {
                 columnDef.render = function (data, type, row) {
                     return eval(render + "(data, type, row)");
                 };
-                columnDefs.push(columnDef)
             }
+            columnDefs.push(columnDef)
 
         });
         return table.dataTable({

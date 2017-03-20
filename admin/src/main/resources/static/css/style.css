@@ -12,3 +12,17 @@
 th[name="action"]{
     width:70px;
 }
+
+.dt-right{
+    text-align: right;
+}
+.dt-left{
+    text-align: left;
+}
+.dt-center{
+    text-align: center;
+}
+
+.dt-word-wrap{
+    overflow:hidden; white-space: nowrap; text-overflow: ellipsis;
+}

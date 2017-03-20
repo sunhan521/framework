@@ -8,7 +8,6 @@ import com.baomidou.mybatisplus.enums.IdType;
 import com.baomidou.mybatisplus.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean;
 import com.framework.core.handler.MyMetaObjectHandler;
-import com.framework.core.injector.MySqlInjector;
 import org.apache.ibatis.mapping.DatabaseIdProvider;
 import org.apache.ibatis.plugin.Interceptor;
 import org.mybatis.spring.boot.autoconfigure.MybatisProperties;
@@ -75,13 +74,11 @@ public class MybatisPlusConfig {
         // ID 策略 AUTO->`0`("数据库ID自增") INPUT->`1`(用户输入ID") ID_WORKER->`2`("全局唯一ID") UUID->`3`("全局唯一ID")
         globalConfig.setIdType(IdType.AUTO.getKey());
         globalConfig.setMetaObjectHandler(new MyMetaObjectHandler());
-        // 注入自定义SQL
-        globalConfig.setSqlInjector(new MySqlInjector());
-
         mybatisPlus.setGlobalConfig(globalConfig);
         MybatisConfiguration mc = new MybatisConfiguration();
         mc.setDefaultScriptingLanguage(MybatisXMLLanguageDriver.class);
         mc.setMapUnderscoreToCamelCase(true);
+
         mybatisPlus.setConfiguration(mc);
         if (this.databaseIdProvider != null) {
             mybatisPlus.setDatabaseIdProvider(this.databaseIdProvider);

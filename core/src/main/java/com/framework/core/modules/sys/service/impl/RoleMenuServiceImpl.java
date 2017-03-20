@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.framework.core.modules.sys.entity.RoleMenu;
 import com.framework.core.modules.sys.mapper.RoleMenuMapper;
 import com.framework.core.modules.sys.service.RoleMenuService;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

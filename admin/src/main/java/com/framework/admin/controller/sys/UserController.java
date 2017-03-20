@@ -151,6 +151,9 @@ public class UserController extends GenericController<User> {
         if (!StringUtils.isEmpty(object.getPassword())){
             Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
             object.setPassword(passwordEncoder.encodePassword(object.getPassword(),""));
+        }else {
+            // 否则不更新密码字段
+            object.setPassword(null);
         }
         Boolean b = getService().updateById(object);
         getService().editRole(object);
