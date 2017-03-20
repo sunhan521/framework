@@ -1,7 +1,7 @@
 package com.framework.core.utils;
 
-import org.apache.commons.lang3.time.DateFormatUtils;
-import org.apache.commons.lang3.time.DateUtils;
+import org.apache.commons.lang.time.DateFormatUtils;
+import org.apache.commons.lang.time.DateUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

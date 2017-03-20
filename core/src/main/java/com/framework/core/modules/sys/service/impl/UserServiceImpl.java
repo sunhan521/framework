@@ -9,7 +9,7 @@ import com.framework.core.modules.sys.mapper.RoleMapper;
 import com.framework.core.modules.sys.mapper.UserMapper;
 import com.framework.core.modules.sys.service.UserRoleService;
 import com.framework.core.modules.sys.service.UserService;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

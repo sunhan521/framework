@@ -1,7 +1,7 @@
 package com.framework.core.po;
 
 import com.framework.core.enums.JsTreeStateEnum;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * @author Han.Sun

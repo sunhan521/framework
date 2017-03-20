@@ -9,7 +9,7 @@ import com.framework.core.modules.sys.mapper.MenuMapper;
 import com.framework.core.modules.sys.mapper.RoleMenuMapper;
 import com.framework.core.modules.sys.service.MenuService;
 import com.framework.core.po.JsTree;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
