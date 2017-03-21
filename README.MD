@@ -33,6 +33,7 @@ mvn spring-boot:run
 4. 如果对应 cookie 不存在，或者包含的 username 和序列号与数据库中保存的不一致，那么将会引导用户到登录页面。
 
 > 由于静态文件Metronic非开源，可以进群获取静态文件资源,然后放在framework/admin/src/main/resources/static目录下，更改sharedVariables.ossPath=/
+
 > 项目属于学习项目，希望多交流，如果有兴趣的朋友可以进群： 579585475
 
 # 历史记录
