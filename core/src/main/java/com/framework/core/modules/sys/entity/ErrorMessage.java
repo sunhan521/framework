@@ -45,13 +45,14 @@ public class ErrorMessage extends Model<ErrorMessage> {
 	@TableField("line_number")
 	private Integer lineNumber;
     /**
-     * 异常cause
-     */
-	private String cause;
-    /**
      * 异常消息
      */
 	private String message;
+
+	/**
+	 * 异常堆栈消息
+	 */
+	private String stackTrace;
     /**
      * 处理状态
      */
@@ -98,14 +99,6 @@ public class ErrorMessage extends Model<ErrorMessage> {
 		this.lineNumber = lineNumber;
 	}
 
-	public String getCause() {
-		return cause;
-	}
-
-	public void setCause(String cause) {
-		this.cause = cause;
-	}
-
 	public String getMessage() {
 		return message;
 	}
@@ -120,6 +113,14 @@ public class ErrorMessage extends Model<ErrorMessage> {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public String getStackTrace() {
+		return stackTrace;
+	}
+
+	public void setStackTrace(String stackTrace) {
+		this.stackTrace = stackTrace;
 	}
 
 	@Override

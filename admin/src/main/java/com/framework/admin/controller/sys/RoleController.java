@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Map;
 
 import static com.framework.core.message.ResponseMessage.created;
@@ -108,6 +109,8 @@ public class RoleController extends GenericController<Role> {
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseMessage add(Role object) {
+        object.setCreateDate(new Date());
+        object.setUpdateDate(new Date());
         getService().insert(object);
         return created(object);
     }

@@ -4,7 +4,7 @@ package com.framework.admin.security.model;
 import com.framework.core.modules.sys.entity.Menu;
 import com.framework.core.modules.sys.entity.Role;
 import com.framework.core.modules.sys.entity.User;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.List;

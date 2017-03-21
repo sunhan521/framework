@@ -97,6 +97,8 @@ public class DictController extends GenericController<Dict> {
     @PostMapping(value = "page")
     @PreAuthorize("hasAuthority('sys:dict:view')")
     public DataTablesPo<Dict> page(Map<String, Object> condition) {
+        if (true)
+            throw new RuntimeException("有问题咯");
         Page<Dict> param = getPage();
         param.setCondition(condition);
         Page<Dict> page = getService().selectPage(param);

@@ -1,6 +1,5 @@
 <#import "/spring.ftl" as spring/>
 <#macro basePath>${absPath!'/'}</#macro>
-<#assign ossPath ='http://idle-data.oss-cn-shanghai.aliyuncs.com/assets/'/>
 <#--metric插件-->
 <#macro importOSSResource(pathList...)>
     <#list pathList as path>
@@ -165,7 +164,7 @@
     </#list>
 </#macro>
 <#macro img(path,class)>
-<img src="<@basePath/>ui/resources/${path}" class="${class}"/>
+<img src="<@basePath/>static/img/${path}" class="${class}"/>
 </#macro>
 
 <#macro pluginUrl(uri)><@basePath/>ui/plugins/${uri}</#macro>

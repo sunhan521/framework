@@ -15,15 +15,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-
     @Autowired
     private UserService userService;
-
     @Override
     public AuthUser loadUserByUsername(String loginName) throws UsernameNotFoundException {
-        User select = new User();
-        select.setLoginName(loginName);
-        select.setEnabled(true);
         User user = userService.getUserByLoginName(loginName);
         if (user == null) {
             throw new UsernameNotFoundException(loginName);

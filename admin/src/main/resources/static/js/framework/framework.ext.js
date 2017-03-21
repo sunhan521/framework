@@ -24,7 +24,7 @@
                 column.defaultContent = '';
                 if (format) {
                     column.render = function (data, type, row) {
-                        if (!data){
+                        if (!data) {
                             return "";
                         }
                         var date = new Date(data);
@@ -380,27 +380,154 @@
             }
         }
     }
-}(jQuery));
 
 
-// 对Date的扩展，将 Date 转化为指定格式的String
-// 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
-// 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)
-// 例子：
-// (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
-// (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
-Date.prototype.Format = function (fmt) { //author: meizz
-    var o = {
-        "M+": this.getMonth() + 1, //月份
-        "d+": this.getDate(), //日
-        "h+": this.getHours(), //小时
-        "m+": this.getMinutes(), //分
-        "s+": this.getSeconds(), //秒
-        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-        "S": this.getMilliseconds() //毫秒
+    /**
+     * 对Date的扩展，将 Date 转化为指定格式的String
+     * 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
+     * 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)
+     * 例子：
+     * (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
+     * (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
+     */
+    Date.prototype.Format = function (fmt) {
+        var o = {
+            "M+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "h+": this.getHours(), //小时
+            "m+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
     };
-    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-    for (var k in o)
-        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-    return fmt;
-};
+
+
+    /**
+     * 是否为空(不为空返回null)
+     *
+     * @returns
+     */
+    String.prototype.isNotBlank = function () {
+        var blank = /^\s*$/;
+        return (!blank.test(this));
+    };
+    /**
+     * 字符串长度是否符合要求
+     *
+     * @returns
+     */
+    String.prototype.isLess = function (minNum) {
+        var flag = (this.length < minNum);
+        return flag;
+    };
+    String.prototype.isMore = function (maxNum) {
+        var flag = (this.length > maxNum);
+        return flag;
+    };
+
+
+    String.prototype.isBetween = function (min, max) {
+
+        return (this.isNotBlank() && (!this.isLess(min)) && (!this.isMore(max)));
+    };
+
+    /**
+     * 是否有效的手机号码
+     *
+     * @returns
+     */
+    String.prototype.isMobileNum = function () {
+        return (new RegExp(/^((13[0-9])|(14[4,7])|(15[^4,\D])|(17[6-8])|(18[0-9]))(\d{8})$/)
+            .test(this));
+    };
+    /**
+     * 是否是整数倍
+     *
+     * @returns
+     */
+    String.prototype.isMultiple = function (num) {
+        return ((this.isBlank()) && (this % num == 0));
+    };
+
+    String.prototype.isPositInt = function () {
+        var res = /^[1-9]+[0-9]*]*$/;
+        var vl = this;
+        var flag = res.test(vl);
+        return flag;
+    };
+
+    String.prototype.isNumLess = function (min) {
+        if (!this.isNotBlank()) {
+            return false;
+        }
+        var fl = parseFloat(this);
+        if (fl < min) {
+            return true;
+        }
+        return false;
+    };
+    String.prototype.isNumMore = function (max) {
+        if (!this.isNotBlank()) {
+            return false;
+        }
+        var fl = parseFloat(this);
+        if (fl > max) {
+            return true;
+        }
+        return false;
+    };
+
+    /** 字符串是否是属于该区间的数字【包含两个区间】 */
+    String.prototype.isNumBetween = function (min, max) {
+        return (this.isNotBlank() && (!this.isNumLess(min)) && (!this.isNumMore(max)))
+    };
+
+    /** 一位小数或者非负整数 */
+    String.prototype.isFloat = function () {
+        var res = new RegExp(/^(\d+\.\d{1,1}|\d+)$/);
+        return res.test(this);
+    };
+    /**
+     * 是否为汉字
+     * @returns
+     */
+    String.prototype.isChinese = function () {
+        return (new RegExp("[\\u4E00-\\u9FFF]+", "g")
+            .test(this));
+    };
+    /**
+     * 是否有效的邮箱
+     *
+     * @returns
+     */
+    String.prototype.isEmail = function () {
+        return (
+            new RegExp(/^([a-zA-Z0-9])+([a-zA-Z0-9_.-])+@([a-zA-Z0-9_-])+((\.([a-zA-Z0-9_-]){2,3}){1,2})$/).test(this)
+        );
+    };
+    /**
+     * 是否是QQ邮箱
+     */
+    String.prototype.isQQEmail = function () {
+        return new RegExp(/^([\s\S]*@qq.com)$/).test(this);
+    };
+
+    String.prototype.isQQ = function () {
+        return new RegExp(/^\d{6,10}$/).test(this);
+    };
+
+    /**
+     * 判断元素值是是否是日期类型
+     */
+    String.prototype.isDate = function () {
+        return (new RegExp(
+            /^([1-2]\d{3})[\/|\-](0?[1-9]|10|11|12)[\/|\-]([1-2]?[0-9]|0[1-9]|30|31)$/ig)
+            .test(this));
+    }
+
+}(jQuery));

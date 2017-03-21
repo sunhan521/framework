@@ -14,7 +14,7 @@
     <meta content=""
           name="description"/>
     <meta content="" name="author"/>
-    <@global.importCss/>
+<@global.importCss/>
     <link rel="shortcut icon" href="favicon.ico"/>
 </head>
 <!-- END HEAD -->
@@ -1118,7 +1118,9 @@
         if ($("a[href='" + url + "']").length > 0) {
             $("a[href='" + url + "']").click();
         } else {
-            Layout.loadAjaxContent(url);
+            console.log(url);
+            //
+            Layout.loadAjaxContent(url, $(".page-sidebar-menu"));
         }
     }
 

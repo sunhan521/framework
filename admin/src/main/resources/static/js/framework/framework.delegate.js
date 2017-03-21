@@ -18,6 +18,10 @@ $(function () {
         $('body').modalmanager('loading');
         var el = $(this);
         var url = el.data("url");
+        var fullWidth = el.data("full-width");
+        if(fullWidth){
+            $modal.addClass("container");
+        }
         var width = el.data("width");
         if (!width) {
             width = 760;

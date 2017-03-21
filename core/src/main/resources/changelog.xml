@@ -151,13 +151,13 @@
             `create_date` datetime NOT NULL COMMENT '创建时间',
             `class_name` varchar(128) DEFAULT NULL COMMENT '异常Class',
             `method_name` varchar(128) DEFAULT NULL COMMENT '异常Method',
-            `line_number` int(11)  DEFAULT NULL COMMENT '行号',
-            `cause` varchar(255) DEFAULT NULL COMMENT '异常cause',
-            `message` text NOT NULL COMMENT '异常消息',
+            `line_number` int(11) DEFAULT NULL COMMENT '行号',
+            `message` varchar(255) DEFAULT NULL COMMENT '异常消息',
             `status` int(11) NOT NULL COMMENT '处理状态',
+            `stack_trace` text  DEFAULT NULL COMMENT '异常堆栈消息',
             PRIMARY KEY (`id`),
-            UNIQUE KEY `cause_unique` (`cause`) USING BTREE
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统错误信息';
+            UNIQUE KEY `unique` (`class_name`,`method_name`,`line_number`)
+            ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='系统错误信息';
         </sql>
     </changeSet>
 

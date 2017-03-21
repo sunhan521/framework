@@ -26,3 +26,12 @@ th[name="action"]{
 .dt-word-wrap{
     overflow:hidden; white-space: nowrap; text-overflow: ellipsis;
 }
+
+#todo-task-modal>.modal-dialog {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 60%;
+    margin: 0 auto;
+}

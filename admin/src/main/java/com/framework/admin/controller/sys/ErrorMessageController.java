@@ -7,19 +7,15 @@ import com.framework.admin.controller.GenericController;
 import com.framework.core.exception.BusinessException;
 import com.framework.core.exception.NotFoundException;
 import com.framework.core.message.ResponseMessage;
-import com.framework.core.modules.sys.entity.User;
-import com.framework.core.modules.sys.service.UserRoleService;
-import com.framework.core.modules.sys.service.UserService;
+import com.framework.core.modules.sys.entity.ErrorMessage;
+import com.framework.core.modules.sys.service.ErrorMessageService;
 import com.framework.core.po.DataTablesPo;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import static com.framework.core.message.ResponseMessage.created;
@@ -27,36 +23,35 @@ import static com.framework.core.message.ResponseMessage.ok;
 
 /**
  * <p>
- * 前端控制器
+ * 字典表 前端控制器
  * </p>
  *
  * @author SunHan
  * @since 2017-01-21
  */
 @RestController
-@RequestMapping("/sys/user")
-public class UserController extends GenericController<User> {
-    @Autowired
-    private UserService userService;
+@RequestMapping("/sys/errorMessage")
+public class ErrorMessageController extends GenericController<ErrorMessage> {
+
+    private EntityWrapper<ErrorMessage> ew = new EntityWrapper<>();
+
 
     @Autowired
-    private UserRoleService userRoleService;
-
+    private ErrorMessageService errorMessageService;
     @Override
-    protected UserService getService() {
-        return userService;
+    protected ErrorMessageService getService() {
+        return errorMessageService;
     }
-
 
     /**
      * 查询列表,并返回查询结果
      */
     @PostMapping(value = "page")
-    @PreAuthorize("hasAuthority('sys:user:view')")
-    public DataTablesPo<User> page(Map<String, Object> condition) {
-        Page<User> param = getPage();
+    @PreAuthorize("hasAuthority('sys:error:view')")
+    public DataTablesPo<ErrorMessage> page(Map<String, Object> condition) {
+        Page<ErrorMessage> param = getPage();
         param.setCondition(condition);
-        Page<User> page = getService().selectPage(param);
+        Page<ErrorMessage> page = getService().selectPage(param);
         return getTablesData(page);
     }
 
@@ -68,13 +63,11 @@ public class UserController extends GenericController<User> {
      * @throws NotFoundException 要查询的数据不存在
      */
     @GetMapping(value = "/{id}")
-    @PreAuthorize("hasAuthority('sys:user:view')")
+    @PreAuthorize("hasAuthority('sys:error:view')")
     public ResponseMessage info(@PathVariable("id") Integer id) {
-        User po = getService().selectById(id);
+        ErrorMessage po = getService().selectById(id);
         if (po == null)
             throw new NotFoundException("data is not found!");
-        List<String> roleIds = userRoleService.getRoleIdsByUserId(id);
-        po.setRoleIds(String.join(",", roleIds));
         return ok(po);
     }
 
@@ -86,9 +79,9 @@ public class UserController extends GenericController<User> {
      * @return 请求结果
      */
     @GetMapping(value = "/total")
-    @PreAuthorize("hasAuthority('sys:user:view')")
-    public ResponseMessage total(User t) {
-        EntityWrapper<User> wrapper = new EntityWrapper<>(t);
+    @PreAuthorize("hasAuthority('sys:error:view')")
+    public ResponseMessage total(ErrorMessage t) {
+        EntityWrapper<ErrorMessage> wrapper = new EntityWrapper<>(t);
         // 获取条件查询
         return ok(getService().selectCount(wrapper));
     }
@@ -102,12 +95,9 @@ public class UserController extends GenericController<User> {
      */
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize("hasAuthority('sys:user:edit')")
-    public ResponseMessage add(User object) {
-        Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
-        object.setPassword(passwordEncoder.encodePassword(object.getPassword(),""));
+    @PreAuthorize("hasAuthority('sys:error:edit')")
+    public ResponseMessage add(ErrorMessage object) {
         getService().insert(object);
-        getService().editRole(object);
         return created(object);
     }
 
@@ -119,21 +109,20 @@ public class UserController extends GenericController<User> {
      * @throws NotFoundException 要删除的数据不存在
      */
     @DeleteMapping(value = "/{id}")
-    @PreAuthorize("hasAuthority('sys:user:edit')")
+    @PreAuthorize("hasAuthority('sys:error:edit')")
     public ResponseMessage delete(@PathVariable("id") Integer id) {
-        User old = getService().selectById(id);
+        ErrorMessage old = getService().selectById(id);
         assertFound(old, "data is not found!");
         getService().deleteById(id);
         return ok();
     }
 
     @PostMapping(value = "/batchDelete")
-    @PreAuthorize("hasAuthority('sys:user:edit')")
+    @PreAuthorize("hasAuthority('sys:error:edit')")
     public ResponseMessage batchDelete(String ids) {
         getService().deleteBatchIds(Arrays.asList(ids.split(",")));
         return ok();
     }
-
 
     /**
      * 根据主键修改数据
@@ -144,19 +133,12 @@ public class UserController extends GenericController<User> {
      * @throws NotFoundException 要修改的数据不存在
      */
     @PutMapping(value = "/{id}")
-    @PreAuthorize("hasAuthority('sys:user:edit')")
-    public ResponseMessage update(@PathVariable("id") Integer id, User object) {
-        User old = getService().selectById(id);
+    @PreAuthorize("hasAuthority('sys:error:edit')")
+    public ResponseMessage update(@PathVariable("id") Integer id, ErrorMessage object) {
+        ErrorMessage old = getService().selectById(id);
         assertFound(old, "data is not found!");
-        if (!StringUtils.isEmpty(object.getPassword())){
-            Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
-            object.setPassword(passwordEncoder.encodePassword(object.getPassword(),""));
-        }else {
-            // 否则不更新密码字段
-            object.setPassword(null);
-        }
+        object.setId(id);
         Boolean b = getService().updateById(object);
-        getService().editRole(object);
         return ok(b);
     }
 
@@ -168,7 +150,7 @@ public class UserController extends GenericController<User> {
      * @throws BusinessException 请求的数据格式错误
      */
     @PutMapping()
-    @PreAuthorize("hasAuthority('sys:user:edit')")
+    @PreAuthorize("hasAuthority('sys:error:edit')")
     public ResponseMessage update(String json) {
         Boolean success;
         if (json.startsWith("[")) {
@@ -180,5 +162,4 @@ public class UserController extends GenericController<User> {
         }
         return ok(success);
     }
-
 }
