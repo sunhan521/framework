@@ -37,7 +37,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         security
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/assets/**", "/css/**", "/img/**", "/js/**").permitAll()
+                .antMatchers("/assets/**", "/css/**", "/img/**", "/js/**","/druid/**").permitAll()
+
                 .anyRequest().authenticated() //其他所有资源都需要认证，登陆后访问
                 .and()
                 .formLogin().loginPage("/login").permitAll()

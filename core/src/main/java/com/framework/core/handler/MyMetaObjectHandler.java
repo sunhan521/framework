@@ -13,10 +13,15 @@ public class MyMetaObjectHandler implements IMetaObjectHandler {
 
 
     public void insertFill(MetaObject metaObject) {
-        Object name = metaObject.getValue("name");
-        if (null == name) {
-            metaObject.setValue("name", "instert-fill");
+        try {
+            Object name = metaObject.getValue("name");
+            if (null == name) {
+                metaObject.setValue("name", "instert-fill");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
     }
 
 }

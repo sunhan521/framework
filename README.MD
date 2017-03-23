@@ -35,7 +35,16 @@ mvn spring-boot:run
 > 由于静态文件Metronic非开源，可以进群获取静态文件资源,然后放在framework/admin/src/main/resources/static目录下，更改sharedVariables.ossPath=/
 > 项目属于学习项目，希望多交流，如果有兴趣的朋友可以进群： 579585475
 
+# 待解决
+* 【功能】图形化代码生成页面
+* 【bug】`was not registered for synchronization because synchronization is not active`
+
+
 # 历史记录
+
+## 2017年03月23日
+* 【功能】新增druid监控 启动成功后浏览  http://localhost:8080/druid/index.html 用户名密码admin/123123
+* 【功能】增加全局新增初始化
 
 ## 2017年03月21日
 

@@ -89,6 +89,7 @@ public class RestControllerExceptionTranslator {
         errorMessages.setMessage(exception.getMessage());
         errorMessages.setStatus(0);
         errorMessageService.asyncInsert(errorMessages);
+        exception.printStackTrace();
         return ResponseMessage.error("服务器异常，请联系管理员", 500);
     }
 

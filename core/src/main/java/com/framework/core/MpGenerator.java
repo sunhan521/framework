@@ -93,14 +93,14 @@ public class MpGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输入文件名称
-                return "/Users/sunhan/Workspace/framework/temp/" + tableInfo.getEntityName() + "list.ftl";
+                return "/Users/sunhan/Workspace/xianyu/xy-framework/admin/src/main/resources/templates/admin/"+tableInfo.getName().split("_")[0]+"/list.ftl";
             }
         });
         focList.add(new FileOutConfig("/template/save.ftl.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输入文件名称
-                return "/Users/sunhan/Workspace/framework/temp/" + tableInfo.getEntityName() + "save.ftl";
+                return "/Users/sunhan/Workspace/xianyu/xy-framework/admin/src/main/resources/templates/admin/"+tableInfo.getName().split("_")[0]+"/save.ftl";
             }
         });
         cfg.setFileOutConfigList(focList);

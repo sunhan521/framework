@@ -26,7 +26,8 @@ import javax.sql.DataSource;
  */
 @Configuration
 public class MybatisPlusConfig {
-    @Autowired(required = false)
+
+    @Autowired
     private DataSource dataSource;
 
     @Autowired(required = false)
