@@ -160,7 +160,7 @@
             ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='系统错误信息';
         </sql>
     </changeSet>
-    <changeSet author="SunHan" id="15862614903-012">
+    <changeSet author="SunHan" id="15862614903-013">
         <sql dbms="mysql">
             insert into `framework`.`sys_menu` ( `id`,`parent_id`, `parent_ids`, `name`, `sort`, `href`, `icon`, `show`, `permission`, `remarks`, `create_date`, `update_date`, `del_flag`) values (17, '9', ',0,9,', '异常消息', '100', 'admin/sys/error/list.html', 'fa fa-frown-o', '1', 'sys:error:view', '异常消息查看', null, null, '0');
             insert into `framework`.`sys_menu` ( `id`,`parent_id`, `parent_ids`, `name`, `sort`, `href`, `icon`, `show`, `permission`, `remarks`, `create_date`, `update_date`, `del_flag`) values (18, '17', ',0,9,17,', '查看', '10', '', 'fa fa-adjust', '0', 'sys:error:view', '', null, null, '0');
