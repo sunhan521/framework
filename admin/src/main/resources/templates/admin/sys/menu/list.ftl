@@ -123,6 +123,22 @@
                 expanderExpandedClass: 'fa fa-chevron-down',
                 expanderCollapsedClass: 'fa fa-chevron-right'
             });
+
+            // 修复点击标题checkbox，数据集没有被相应的选中
+            $('#bee_table').find('.group-checkable').change(function () {
+                var set = jQuery(this).attr("data-set");
+                var checked = jQuery(this).is(":checked");
+                jQuery(set).each(function () {
+                    if (checked) {
+                        $(this).prop("checked", true);
+                        $(this).parents('tr').addClass("active");
+                    } else {
+                        $(this).prop("checked", false);
+                        $(this).parents('tr').removeClass("active");
+                    }
+                });
+            });
+
         });
 
     }
