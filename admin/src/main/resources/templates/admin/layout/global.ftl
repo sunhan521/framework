@@ -71,7 +71,6 @@
 
     "global/plugins/datatables/datatables.min.css",
     "global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css",
-
     "global/plugins/jstree/dist/themes/default/style.min.css",
 
 
@@ -149,9 +148,6 @@
 <script type="text/javascript">basePath = "<@basePath/>";</script>
 </#macro>
 
-<#macro importFontIcon>
-    <@resources "icons/css/font-awesome.min.css"/>
-</#macro>
 <#--资源文件-->
 <#macro resources(paths...)>
     <#list paths as path>

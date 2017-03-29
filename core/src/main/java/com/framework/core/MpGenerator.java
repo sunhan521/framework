@@ -28,9 +28,9 @@ public class MpGenerator {
         gc.setOutputDir("/Users/sunhan/Workspace/framework/core/src/main/java");
         gc.setFileOverride(true);
         gc.setActiveRecord(true);
-        gc.setEnableCache(true);// XML 二级缓存
-        gc.setBaseResultMap(true);// XML ResultMap
-        gc.setBaseColumnList(true);// XML columList
+        gc.setEnableCache(false);// XML 二级缓存
+        gc.setBaseResultMap(false);// XML ResultMap
+        gc.setBaseColumnList(false);// XML columList
         gc.setAuthor("Sun.Han");
         // 自定义文件命名，注意 %s 会自动填充表实体属性！
         gc.setMapperName("%sMapper");

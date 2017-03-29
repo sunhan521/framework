@@ -164,21 +164,16 @@
         var $form = $(this);
         $.get(remoteUrl, {}, function (data) {
             $.each(data.data, function (key, value) {
-                //all form elements for a name. Multiple checkboxes can have the same name, but different values
                 var $ctrls = $form.find('[name=' + key + ']');
-                //console.log("Number found elements: " + $ctrls.length );
-                if ($ctrls.is('select')) //special form types
-                {
+                if ($ctrls.is('select')) {
                     $('option', $ctrls).each(function () {
                         if (this.value == value)
                             this.selected = true;
                     });
                     $ctrls.trigger("change");
-                }
-                else if ($ctrls.is('textarea')) {
+                } else if ($ctrls.is('textarea')) {
                     $ctrls.val(value);
-                }
-                else {
+                } else {
                     switch ($ctrls.attr("type"))   //input type
                     {
                         case "text":
@@ -189,8 +184,6 @@
                             if ($ctrls.length >= 1) {
                                 $.each($ctrls, function () {
                                     var elemValue = $(this).attr("value");
-                                    console.log("elemValue:" + elemValue);
-                                    console.log("value:" + value);
                                     if (elemValue == value) {
                                         $(this).prop('checked', true);
                                     } else {
@@ -273,43 +266,85 @@
      * Server Return Class List<KeyValue>
      */
     $.fn.beeCheck = function () {
-        var el = $(this);
-        var url = el.data("url");
-        var name = el.data("name");
-        var type = "checkbox";
-        if (url != undefined) {
-            $.get(url, {}, function (data) {
-                $.each(data, function (i, item) {
-                    var option = '<label class="mt-checkbox col-md-6">' +
-                        '<input type="' + type + '" id="' + name + '_' + item.id + '" name="' + name + '" value="' + item.id + '">' +
-                        item.text +
-                        '<span></span>' +
-                        '</label>';
-                    el.append(option);
-                })
-            });
-        }
+        $(this).each(function (i, el) {
+            var url = $(el).data("url");
+            var name = $(el).data("name");
+            var type = "checkbox";
+            if (url != undefined) {
+                $.get(url, {}, function (data) {
+                    $.each(data, function (i, item) {
+                        var option = '<label class="mt-checkbox col-md-6">' +
+                            '<input type="' + type + '" id="' + name + '_' + item.id + '" name="' + name + '" value="' + item.id + '">' +
+                            item.text +
+                            '<span></span>' +
+                            '</label>';
+                        $(el).append(option);
+                    })
+                });
+            }
+        });
+
     };
 
     $.fn.beeRadio = function () {
-        var el = $(this);
-        var url = el.data("url");
-        var name = el.data("name");
-        var type = "radio";
-        if (url != undefined) {
-            $.get(url, {}, function (data) {
-                $.each(data, function (i, item) {
-                    var option = '<label class="mt-radio">' +
-                        '<input type="' + type + '" name="' + name + '" value="' + item.id + '">' +
-                        item.text +
-                        '<span></span>' +
-                        '</label>';
-                    el.append(option);
-                })
-            });
-        }
+        $(this).each(function (i, el) {
+            var url = $(el).data("url");
+            var name = $(el).data("name");
+            var type = "radio";
+            if (url != undefined) {
+                $.get(url, {}, function (data) {
+                    $.each(data, function (i, item) {
+                        var option = '<label class="mt-radio">' +
+                            '<input type="' + type + '" name="' + name + '" value="' + item.id + '">' +
+                            item.text +
+                            '<span></span>' +
+                            '</label>';
+                        $(el).append(option);
+                    })
+                });
+            }
+        });
 
     };
+    $.fn.beeSearchableMulti = function () {
+        var el = $(this);
+        el.multiSelect({
+            selectableHeader: "<input type='text' class='search-input' autocomplete='off' placeholder=''>",
+            selectionHeader: "<input type='text' class='search-input' autocomplete='off' placeholder=''>",
+            afterInit: function (ms) {
+                var that = this,
+                    $selectableSearch = that.$selectableUl.prev(),
+                    $selectionSearch = that.$selectionUl.prev(),
+                    selectableSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selectable:not(.ms-selected)',
+                    selectionSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selection.ms-selected';
+
+                that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
+                    .on('keydown', function (e) {
+                        if (e.which === 40) {
+                            that.$selectableUl.focus();
+                            return false;
+                        }
+                    });
+
+                that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
+                    .on('keydown', function (e) {
+                        if (e.which == 40) {
+                            that.$selectionUl.focus();
+                            return false;
+                        }
+                    });
+            },
+            afterSelect: function () {
+                this.qs1.cache();
+                this.qs2.cache();
+            },
+            afterDeselect: function () {
+                this.qs1.cache();
+                this.qs2.cache();
+            }
+        });
+    }
+
 
     /**
      * 以指定的Json数据，初始化JStree控件
